@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 def get_env(key):
     temp = os.getenv(key)
     if not temp:
-        logging.critical("could not find {} from ags.env file".format(key))
+        logging.critical("could not find {} from example.env file".format(key))
         sys.exit(1)
     return temp
 
@@ -30,7 +30,7 @@ logging.basicConfig(level=logging.INFO)
 # start of program
 # Load environment variables
 logging.info("starting program")
-load_dotenv("ags.env")
+load_dotenv("example.env")
 
 mqtt_host = get_env("MQTT_HOST")
 mqtt_port = int(get_env("MQTT_PORT"))

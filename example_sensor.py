@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 def get_env(key):
     temp = os.getenv(key)
     if not temp:
-        logging.critical("could not find {} from ags.env file".format(key))
+        logging.critical("could not find {} from example.env file".format(key))
         sys.exit(1)
     return temp
 
@@ -25,12 +25,14 @@ logging.basicConfig(level=logging.INFO)
 # Start of program
 # Load environment variables
 logging.info("Starting program")
-load_dotenv("ags.env")
+load_dotenv(sys.argv[1])
 
 mqtt_host = get_env("MQTT_HOST")
 mqtt_port = int(get_env("MQTT_PORT"))
 mqtt_username = get_env("MQTT_USERNAME")
 mqtt_password = get_env("MQTT_PASSWORD")
+
+token = get_env("TOKEN")
 
 # Create MQTT client
 client = paho.mqtt.client.Client()
@@ -44,24 +46,15 @@ logging.info("Connected to ags broker")
 current = str(int(time.time()))
 
 data = {
-    "token": "7eba9b42-936d-482b-8732-9221413b9451",
-    "data": [
-        {
+    "token": token,
+    "data": {
             "timestamp": current,
             "temperature": 32.0,
             "humidity": 60.0,
             "light": 194.17,
             "soil_moisture": 300,
             "water_level": 511
-        }, {
-            "timestamp": current,
-            "temperature": 32.0,
-            "humidity": 60.0,
-            "light": 194.17,
-            "soil_moisture": 300,
-            "water_level": 511
-        }
-    ]
+    },
 }
 
 body = json.dumps(data)
