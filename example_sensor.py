@@ -68,4 +68,5 @@ body = json.dumps(data)
 logging.info(body)
 
 # Publish data to broker
-info = client.publish("mqtt/hello-world", body, 1, False)
+info = client.publish("mqtt/influx", body, 1, False)
+info2 = client.publish("mqtt/rethink", body, 1, False)
