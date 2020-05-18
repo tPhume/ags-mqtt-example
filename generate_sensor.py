@@ -46,6 +46,7 @@ logging.info("Connected to ags broker")
 
 # Loop and send every 30 second
 # Create JSON body
+client.loop_start()
 while True:
     seed(time.time())
     current = str(int(time.time()))
