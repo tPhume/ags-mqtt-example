@@ -5,9 +5,14 @@ import time
 import json
 import logging
 
+from random import seed, randint
+
 # Third party
 import paho.mqtt.client
 from dotenv import load_dotenv
+
+# Init random
+seed(time.time())
 
 
 # Helper function to get env variable
@@ -48,12 +53,12 @@ current = str(int(time.time()))
 data = {
     "token": token,
     "data": {
-            "timestamp": current,
-            "temperature": 32.0,
-            "humidity": 60.0,
-            "light": 194.17,
-            "soil_moisture": 300,
-            "water_level": 511
+        "timestamp": current,
+        "temperature": randint(20, 30),
+        "humidity": randint(30, 40),
+        "light": randint(300, 400),
+        "soil_moisture": randint(300, 400),
+        "water_level": 511
     },
 }
 
